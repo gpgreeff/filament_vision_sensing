@@ -140,7 +140,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">From Vision</span></p></body></html>"))
         self.check_vision.setText(_translate("MainWindow", "Vision Interface Check"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_interface), _translate("MainWindow", "Interface"))
-        self.groupBox.setTitle(_translate("MainWindow", "GroupBox"))
+        self.groupBox.setTitle(_translate("MainWindow", "New Video Recording"))
         self.recording_meas_only.setText(_translate("MainWindow", "Do not record video file, but measure"))
         self.recording_start.setText(_translate("MainWindow", "Start Recording"))
         self.recording_video_and_meas.setText(_translate("MainWindow", "Record video file and measure"))

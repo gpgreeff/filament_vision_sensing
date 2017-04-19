@@ -2,40 +2,36 @@
 """
 Created on Fri Sep 13 14:26:59 2013
 
-@author: pgreeff
 
-special methods for pyqt5 load/save and configs,
+Special methods for pyqt5 load/save and configs,
 
 
 REVISION:
-2.0.0   2017-01-06
-        - Python 3 and PyQt5 version, only kept certain functions.
-        - did not re-implement UiConfigInterface for now
+    2.0.0   2017-01-06
+            - Python 3 and PyQt5 version, only kept certain functions.
+            - did not re-implement UiConfigInterface for now
+            
+    1.0.1   2015-07-10
+            - added QDateEdit into ui_types
+            
+    1.0.0   2015_07_09  
+            -general config methods
+            -additional ui_config interface  
+    
+    0.1.1   2015_06_23  
+            -Add UI file load/save and basic file interactions methods
+            -Name changed to QtLoadSaveObjects
+    
+    0.1.0   2015_06_15  
+            -First Use (with RUI app)
+            
+    0.0.1   2015-06_04 
+            -Named QtConfigToolsObjects
         
-1.0.1   2015-07-10
-        - added QDateEdit into ui_types
-        
-1.0.0   2015_07_09  
-        -general config methods
-        -additional ui_config interface  
-
-0.1.1   2015_06_23  
-        -Add UI file load/save and basic file interactions methods
-        -Name changed to QtLoadSaveObjects
-
- 0.1.0   2015_06_15  
-        -First Use (with RUI app)
-        
-0.0.1   2015-06_04 
-        -Named QtConfigToolsObjects
-        
-
-
-
 """
 
 __version__ = "2.0.0"
-__author__ = "Pieter Greeff"
+__author__ = "GP Greeff"
 
 
 #from PyQt5 import QtGui
@@ -46,13 +42,10 @@ import os,time,glob
 import json
 
 
-
-
-#==============================================================================
 #FILENAME GENERATION / FOLDERS
-#============================================================================== 
+ 
 def make_date_filename(first = None,last = None,ext = None,folder = None):
-    '''
+    """
     Make a date & time based file name.
 
     format of filename:    
@@ -61,7 +54,7 @@ def make_date_filename(first = None,last = None,ext = None,folder = None):
     E.g.:
         Test_2015_01_15__01_01_01_last.txt
     
-    '''
+    """
     
     filename = time.strftime("%Y_%m_%d__%H_%M_%S", time.localtime())
     
@@ -78,26 +71,26 @@ def make_date_filename(first = None,last = None,ext = None,folder = None):
         filename = os.path.join(folder,filename)
         
     return filename 
-#-------------------------------------------------------------------------------    
+    
 def clean_text(text,default_text = 'text'):
-    '''
+    """
     remove unwanted chars from text, for folders/filenames
     text must be string
     from stackoverflow answer/comment
-    '''    
+    """    
     text = str(text)
     new_text = ''.join(i for i in text if i not in "\/:*?<>|")
     new_text = new_text.strip()
     if len(new_text) == 0:
         new_text = default_text
     return new_text
-#------------------------------------------------------------------------------
+
 def check_unique_filename(parent,dir_path,filename,name_delim = '_'):
-    '''
+    """
     determines if filepath exits,
     if does ask user if the file must be replaced,
     otherwise generate a new name.
-    '''
+    """
     msg = 'Overwrite file: {}?'
     new_dir_name = os.path.dirname(dir_path)
     if not os.path.exists(new_dir_name):
@@ -132,13 +125,13 @@ def check_unique_filename(parent,dir_path,filename,name_delim = '_'):
                         break
     dir_path += filename
     return dir_path 
-#------------------------------------------------------------------------------
+
 def get_files_like(folder,filename_contains,iterator = False,ext = 'txt'):
-    '''
+    """
     get files in folder that contains filename_contains with extention ext
     
     return an iterator if True, otherwise a list
-    '''
+    """
     
     filenames = None
     if folder is not None:
@@ -163,31 +156,31 @@ def get_files_like(folder,filename_contains,iterator = False,ext = 'txt'):
 #            logging.warning('No files found with search: {}'.format(search))
 #            print('No files found with search: {}'.format(search))
     return filenames 
-#------------------------------------------------------------------------------
+
 def get_folders(main_directory):
-    '''
+    """
     return a list of all the subdirectories in the main_directory
     http://stackoverflow.com/questions/973473/
     getting-a-list-of-all-subdirectories-in-the-current-directory
     
     return None if no sub-folders
-    '''
+    """
     folders = [x[0] for x in os.walk(main_directory)]
     folders = folders[1:]
     
     if len(folders) == 0:
         return None
     return folders
-#------------------------------------------------------------------------------    
+    
 def get_txt_and_cfg_pair(folder):
-    '''
+    """
     find a matching pair in folder,
     X.cgf and X.txt
     
     if none found or first cfg found unpaired return None
     
     else return [X.cgf,X.txt]
-    '''
+    """
     cfg_file = None
     cfg_file_root = None
     txt_file = None
@@ -212,15 +205,13 @@ def get_txt_and_cfg_pair(folder):
         
     return None
     
-    
-#------------------------------------------------------------------------------
 def set_save_file_location(parent, default_dir,caption = "Save Data",
                         fileType = 'Text File (*.txt)',defaultFile = None):
-    '''
+    """
     Launch a QFileDialog.getSaveFileName and check if filename is correct.
     
     Return True on success, with filename string
-    '''
+    """
     resultFileName = None
     if not(os.path.isdir(default_dir)):
         default_dir = os.getcwd()
@@ -238,13 +229,13 @@ def set_save_file_location(parent, default_dir,caption = "Save Data",
         return True,resultFileName
             
     return False,resultFileName
-#------------------------------------------------------------------------------
+
 def load_file_name(parent, default_dir = None,caption = "Load Data",
                  type_filter = 'Text File (*.txt)'):
-    '''
+    """
     user requested to selects filename, 
     return filename or None (not succesful)
-    '''
+    """
 #    filename = None
     if default_dir is None or not(os.path.isdir(default_dir)):
         default_dir = os.getcwd()
@@ -261,11 +252,11 @@ def load_file_name(parent, default_dir = None,caption = "Load Data",
 #            except ValueError:
 #                filename = test_name
     return test_name
-#------------------------------------------------------------------------------
+
 def load_directory_name(parent,default_dir,caption = 'Select Directory for Files'):
-    '''
+    """
     request user to select a folder
-    '''
+    """
     if not(os.path.isdir(default_dir)):
         default_dir = os.getcwd()
 
@@ -275,11 +266,11 @@ def load_directory_name(parent,default_dir,caption = 'Select Directory for Files
     dir_name = test_dir_exists(test_dir)
     
     return dir_name
-#------------------------------------------------------------------------------
+
 def test_dir_exists(test_dir):
-    '''
+    """
     test if test_dir exists
-    '''
+    """
     dir_name = None
     if test_dir != None and test_dir:
         if os.path.isdir(test_dir):
@@ -289,60 +280,60 @@ def test_dir_exists(test_dir):
             except ValueError:
                 dir_name =  test_dir + '\\'
     return dir_name
-#------------------------------------------------------------------------------
+
 def split_path(path):
-    '''
+    """
     http://stackoverflow.com/questions/3167154/
     how-to-split-a-dos-path-into-its-components-in-python
-    '''
+    """
     path = os.path.normpath(path)
     a,b = os.path.split(path)
     return (split_path(a) if len(a) and len(b) else []) + [b]
 
-#==============================================================================
+
 def set_combo_index(combo_box,text):
-    '''
+    """
     http://stackoverflow.com/questions/22797794/
     pyqt-how-to-set-combobox-to-item-knowing-items-text-a-title
-    '''
+    """
     index = combo_box.findText(text, QtCore.Qt.MatchFixedString)
     if index >= 0:
          combo_box.setCurrentIndex(index)
-#==============================================================================
+
 def make_config_dict(config):
-    '''
+    """
     config to dict, try to convert str to floats/ints
     
     http://stackoverflow.com/questions/1773793/
     convert-configparser-items-to-dictionary
-    '''
+    """
 
     return {s:{key:convert_str(value) for key,value in config.items(s)} for s in config.sections()}
-#==============================================================================
+
 def convert_str(convert_value):
-    '''
+    """
     first try float, if a float, try int
     else leave str
-    '''
+    """
     try:#as float
-        convertValue = float(convert_value)
-        if convertValue.is_integer():
-            convertValue = int(convert_value)
+        convert_value = float(convert_value)
+        if convert_value.is_integer():
+            convert_value = int(convert_value)
     except ValueError:
-        convertValue = str(convert_value)#as string
+        convert_value = str(convert_value)#as string
         
-    return convertValue
-#==============================================================================
+    return convert_value
+
 def append_texteditor(text_edit_widget,data = '',replace = '"'):
-    '''
+    """
     append text editor and scroll to the bottom
-    '''
+    """
     data = json.dumps(data, indent = 4)
     for item in replace:
         data = data.replace(item,'')
     text_edit_widget.append(data)
     text_edit_widget.ensureCursorVisible()
-#==============================================================================
+
 if __name__ == '__main__':
     print('main')
     import configparser
