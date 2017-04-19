@@ -7,13 +7,14 @@ Created on Fri Sep 13 14:26:59 2013
 special methods for pyqt qtable
 
 REVISION:
-1.0   2015-05-30    RCS_2 first version
-2.0   2017-01-13    Py3 and PyQt5   
+    2.0   2017-01-13    Py3 and PyQt5   
+    1.0   2015-05-30    RCS_2 first version
+
         
 """
 
 __version__ = "2.0."
-__author__ = "Pieter Greeff"
+__author__ = "GP Greeff"
 
 
 from PyQt5 import QtCore
@@ -21,29 +22,27 @@ from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtGui import QColor
 #import copy
 
-#TABLE METHODS
-#-------------------------------------------------------------------------------
 def set_row_headers(table,header_list, fmt = '{}'):
-    '''
+    """
     set row headers as per list
-    '''
+    """
     for index,header in enumerate(header_list):
         header = fmt.format(header)
         header_item = make_item(header)
         table.setVerticalHeaderItem(index,header_item) 
-#-------------------------------------------------------------------------------
+
 def set_column_headers(table,header_list, fmt = '{}'):
-    '''
+    """
     set column headers as per list
-    '''
+    """
     for index,header in enumerate(header_list):
         header = fmt.format(header)
         header_item = make_item(header)
         table.setHorizontalHeaderItem(index,header_item)        
-#-------------------------------------------------------------------------------
+
 def table_colours(color):
-    '''
-    '''
+    """
+    """
     if color == 'normal':
         return QColor("white")
     elif color == 'selected':
@@ -55,10 +54,10 @@ def table_colours(color):
     else:
         return QColor("white")
 
-#-------------------------------------------------------------------------------
+
 def make_item(itemStr,bckColor = None,enabledFlag = True,checked = False):
-    '''
-    '''
+    """
+    """
     table_item = QTableWidgetItem(str(itemStr))
     
     if not(enabledFlag):
@@ -70,22 +69,22 @@ def make_item(itemStr,bckColor = None,enabledFlag = True,checked = False):
     if bckColor is not None:
         table_item.setBackground(table_colours(bckColor))
     return table_item
-#-------------------------------------------------------------------------------
+
 def set_item(table,itemStr,row, col,bckColor = None,enabledFlag = True,
              checked = False):
-    '''
+    """
     set table with itemStr @ (row,col) with bckColor, editability is optional
-    '''
+    """
     table_item = make_item(itemStr,bckColor,enabledFlag,checked)
     table.setItem(row,col,table_item)
 
-#-------------------------------------------------------------------------------
+
 def set_table_column(table,item_list,column,bck_color = 'normal',enabled_flag = True,
                    format_string = "%3.1f",checked = True):
-    '''
+    """
     Set table with items in item_list @ (col),
     with bckColor, editability is optional
-    '''
+    """
     for row,new_item in enumerate(item_list):
         if format_string != None:
             new_item = format_string % new_item
@@ -93,47 +92,47 @@ def set_table_column(table,item_list,column,bck_color = 'normal',enabled_flag = 
         table.setItem(row,column,table_item)
 
 
-#-------------------------------------------------------------------------------
+
 def reset(table,clearStr = '',enabledFlag = True):
-    '''
-    '''
+    """
+    """
     #clear previous values from all cells
     for rowIndex in range(table.rowCount()):
         for colIndex in range(table.columnCount()):
             set_item(table,clearStr,rowIndex, colIndex,'normal',enabledFlag)
 
-#-------------------------------------------------------------------------------
+
 def set_bck_color(table,column,row,color = 'normal'):
-    '''
-    '''
+    """
+    """
     table.setCurrentCell(row,column)
     tableItem = table.currentItem()
     try:
         tableItem.setBackground(table_colours(color))
     except AttributeError:
         pass
-#-------------------------------------------------------------------------------
+
 def set_all_color(table,color = 'normal'):
-    '''
-    '''
+    """
+    """
     for row in range(table.rowCount()):
         for col in range(table.columnCount()):
             set_bck_color(table,col,row,color)
-#-------------------------------------------------------------------------------
+
 def set_index_color(table,column,color= 'normal',indexList = None):
-    '''
+    """
     set background colour of rows in indexList, of column of table.
     if no indexList, then the entire column
-    '''
+    """
     if indexList == None:
         indexList = range(table.rowCount())
     for row in indexList:
 #        print row,column
         set_bck_color(table,column,row,color)
-#-------------------------------------------------------------------------------
+
 def get_row_vals(table,columns,row):
-    '''
-    '''
+    """
+    """
     #get values in row, from columns[0] to columns[1]
     rowVals = []
     #print 'tableget_row_vals',row,columns,range(columns[0],columns[1])
@@ -151,10 +150,10 @@ def get_row_vals(table,columns,row):
             except AttributeError:
                 pass
     return rowVals
-#-------------------------------------------------------------------------------
+
 def get_column_vals(table,column = 0,rows = None,only_if_checked = False,
                     min_num_vals = 1):
-    '''
+    """
     try to get float values from colum
     in row, from rows[0] to rows[1], or all rows if None
     
@@ -164,7 +163,7 @@ def get_column_vals(table,column = 0,rows = None,only_if_checked = False,
         return val list on 
     else:
         return None
-    '''
+    """
     col_vals = []
 #    all_col_vals = []
     if rows == None:
@@ -191,16 +190,13 @@ def get_column_vals(table,column = 0,rows = None,only_if_checked = False,
         return col_vals
     else:
         return None
-        
-        
-    
-#-------------------------------------------------------------------------------
+
 def get_current_index(table):
-    '''
+    """
     note: returns x,y
-    '''
+    """
     return table.currentColumn(),table.currentRow()
-#-------------------------------------------------------------------------------
+
 def get_single_value_number(table,col,row):
     #try and get a number from a cell
     table.setCurrentCell(row,col)
@@ -215,12 +211,12 @@ def get_single_value_number(table,col,row):
     except AttributeError:
         pass
     return None
-#-------------------------------------------------------------------------------
+
 def set_table_dictlist(table,dictlist,col_order = None,header_upper = False):
-    '''
+    """
     dictlist, list of dicts
     each dict with the same keys
-    '''
+    """
     reset(table)
     num_rows = len(dictlist)
     num_cols = len(dictlist[0])
@@ -253,4 +249,3 @@ def set_table_dictlist(table,dictlist,col_order = None,header_upper = False):
 #    set_row_headers(table,)
     
     
-#-------------------------------------------------------------------------------

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>658</width>
-    <height>901</height>
+    <height>923</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -43,64 +43,6 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="5" column="4">
-            <widget class="QLabel" name="label_18">
-             <property name="text">
-              <string>FPS</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="4">
-            <widget class="QLabel" name="label_19">
-             <property name="text">
-              <string>Measured Width</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="4" colspan="3">
-            <widget class="QCheckBox" name="report_results">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Report Results to Pipe</string>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3" rowspan="12">
-            <widget class="Line" name="line_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="3">
-            <widget class="QTextBrowser" name="text_pipe_in">
-             <property name="documentTitle">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4">
-            <widget class="QLabel" name="label_17">
-             <property name="text">
-              <string>Filament Speed</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="4">
-            <widget class="QLabel" name="label_16">
-             <property name="text">
-              <string>Gear Speed</string>
-             </property>
-            </widget>
-           </item>
            <item row="6" column="5" colspan="2">
             <widget class="QDoubleSpinBox" name="measured_width">
              <property name="readOnly">
@@ -117,6 +59,13 @@
              </property>
             </widget>
            </item>
+           <item row="4" column="4">
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>Gear Speed</string>
+             </property>
+            </widget>
+           </item>
            <item row="3" column="5" colspan="2">
             <widget class="QDoubleSpinBox" name="filament_speed">
              <property name="readOnly">
@@ -130,6 +79,20 @@
              </property>
              <property name="decimals">
               <number>1</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="3">
+            <widget class="QTextBrowser" name="text_pipe_in">
+             <property name="documentTitle">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="4">
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>Filament Speed</string>
              </property>
             </widget>
            </item>
@@ -174,13 +137,6 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0" colspan="3">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Pipe In&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="0" colspan="3">
             <widget class="Line" name="line_4">
              <property name="minimumSize">
@@ -193,6 +149,16 @@
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
+           </item>
+           <item row="0" column="0" colspan="3">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Pipe In&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4" colspan="3">
+            <widget class="QTextBrowser" name="text_pipe_out"/>
            </item>
            <item row="2" column="4" colspan="3">
             <widget class="Line" name="line_5">
@@ -207,30 +173,20 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="4" colspan="3">
-            <widget class="QTextBrowser" name="text_pipe_out"/>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="record_save">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Save Video</string>
+             </property>
+            </widget>
            </item>
            <item row="0" column="4" colspan="3">
             <widget class="QLabel" name="label_2">
              <property name="text">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Process Log&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QPushButton" name="record_start_new">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>Start New</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="record_save">
-             <property name="text">
-              <string>Save Video</string>
              </property>
             </widget>
            </item>
@@ -244,20 +200,13 @@
            <item row="5" column="1">
             <widget class="QLineEdit" name="record_filename"/>
            </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_22">
-             <property name="text">
-              <string>Video Recording:</string>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="record_start_new">
+             <property name="enabled">
+              <bool>false</bool>
              </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QLineEdit" name="record_state">
              <property name="text">
-              <string>Ready</string>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
+              <string>Start New</string>
              </property>
             </widget>
            </item>
@@ -278,23 +227,57 @@
              </property>
             </widget>
            </item>
-           <item row="8" column="4">
-            <widget class="QLabel" name="label_25">
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_22">
              <property name="text">
-              <string>Missed Frames</string>
+              <string>Video Recording:</string>
              </property>
             </widget>
            </item>
-           <item row="8" column="5" colspan="2">
-            <widget class="QSpinBox" name="missed_frames">
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="record_state">
+             <property name="text">
+              <string>Ready</string>
+             </property>
              <property name="readOnly">
               <bool>true</bool>
              </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
+            </widget>
+           </item>
+           <item row="7" column="4" colspan="3">
+            <widget class="QCheckBox" name="report_results">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
              </property>
-             <property name="maximum">
-              <number>99999</number>
+             <property name="text">
+              <string>Report Results to Pipe</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="4">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>FPS</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="4">
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>Measured Width</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3" rowspan="11">
+            <widget class="Line" name="line_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
              </property>
             </widget>
            </item>
@@ -317,48 +300,6 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="3" column="1">
-            <widget class="QSpinBox" name="x_gear_teeth">
-             <property name="maximum">
-              <number>640</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>X Gear Center</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="text">
-              <string>X Gear Teeth</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="QLabel" name="label_12">
-             <property name="text">
-              <string>OD Resize Factor</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="x_gear_c">
-             <property name="maximum">
-              <number>640</number>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Alignment Line Left</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="1">
             <widget class="QDoubleSpinBox" name="img_rotation">
              <property name="wrapping">
@@ -369,6 +310,227 @@
              </property>
              <property name="maximum">
               <double>359.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QComboBox" name="mat_colour">
+             <item>
+              <property name="text">
+               <string>White</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Black</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Filament &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Image Rotation</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="6">
+            <widget class="QPushButton" name="save_config">
+             <property name="text">
+              <string>Save Config</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QComboBox" name="mat_type">
+             <item>
+              <property name="text">
+               <string>PLA</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>ABS</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="6">
+            <widget class="Line" name="line_3">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="3">
+            <widget class="QLineEdit" name="mat_manufacturer">
+             <property name="text">
+              <string>Das Filament</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="5">
+            <widget class="QLineEdit" name="mat_date_id">
+             <property name="text">
+              <string>2016_1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="4">
+            <widget class="QLabel" name="label_20">
+             <property name="text">
+              <string>Filament Date/ID</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_29">
+             <property name="text">
+              <string>Gear ROI Y1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_28">
+             <property name="text">
+              <string>Gear ROI X1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="gear_roi_x">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="4">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Gear ROI Size</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>Filament Speed ROI X1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="4">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>Filament Speed ROI Size</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QSpinBox" name="fil_roi_x">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>Filament Speed ROI Y1</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="3">
+            <widget class="QSpinBox" name="fil_roi_y">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>Width Left Border</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Width Y Pre-End</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="w_y2">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="3">
+            <widget class="QSpinBox" name="gear_roi_y">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QSpinBox" name="w_vline_left_border">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QLabel" name="label_26">
+             <property name="text">
+              <string>Width Right Border</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="5">
+            <widget class="QSpinBox" name="w_vline_right_border">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="5">
+            <widget class="QSpinBox" name="gear_roi_size">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="5">
+            <widget class="QSpinBox" name="fil_roi_size">
+             <property name="maximum">
+              <number>640</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Alignment Line Left</string>
              </property>
             </widget>
            </item>
@@ -393,179 +555,39 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="label_10">
-             <property name="text">
-              <string>Y Gear Center</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QComboBox" name="mat_colour">
-             <item>
-              <property name="text">
-               <string>White</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Clear</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Black</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="label_13">
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Filament &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="3">
-            <widget class="QSpinBox" name="y_gear_c">
-             <property name="maximum">
-              <number>640</number>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Image Rotation</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="4">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Y Pre-End</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="3">
-            <widget class="QDoubleSpinBox" name="od_resize_factor">
-             <property name="decimals">
-              <number>3</number>
-             </property>
-             <property name="minimum">
-              <double>0.100000000000000</double>
-             </property>
-             <property name="maximum">
-              <double>10.000000000000000</double>
-             </property>
-             <property name="singleStep">
-              <double>0.100000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="5">
-            <widget class="QSpinBox" name="y_pre_end">
-             <property name="maximum">
-              <number>640</number>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Y Post-Start</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="5">
-            <widget class="QSpinBox" name="y_post_start">
-             <property name="maximum">
-              <number>640</number>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0" colspan="6">
-            <widget class="QPushButton" name="save_config">
-             <property name="text">
-              <string>Save Config</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="QComboBox" name="mat_type">
-             <item>
-              <property name="text">
-               <string>PLA</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>ABS</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="5" column="3">
-            <widget class="QLineEdit" name="mat_manufacturer">
-             <property name="text">
-              <string>Das Filament</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="5">
-            <widget class="QLineEdit" name="mat_date_id">
-             <property name="text">
-              <string>2016_1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="4">
-            <widget class="QLabel" name="label_20">
-             <property name="text">
-              <string>Filament Date/ID</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0" colspan="6">
-            <widget class="Line" name="line_3">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>10</height>
-              </size>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
           </layout>
           <zorder>img_rotation</zorder>
           <zorder>label_3</zorder>
-          <zorder>label_6</zorder>
-          <zorder>vline_right</zorder>
-          <zorder>label_5</zorder>
-          <zorder>vline_left</zorder>
           <zorder>label_13</zorder>
           <zorder>mat_colour</zorder>
-          <zorder>label_9</zorder>
-          <zorder>x_gear_c</zorder>
-          <zorder>label_10</zorder>
-          <zorder>y_gear_c</zorder>
-          <zorder>od_resize_factor</zorder>
-          <zorder>label_12</zorder>
-          <zorder>label_11</zorder>
-          <zorder>x_gear_teeth</zorder>
-          <zorder>label_8</zorder>
-          <zorder>y_post_start</zorder>
-          <zorder>y_pre_end</zorder>
-          <zorder>label_7</zorder>
           <zorder>save_config</zorder>
           <zorder>mat_type</zorder>
           <zorder>mat_manufacturer</zorder>
           <zorder>mat_date_id</zorder>
           <zorder>label_20</zorder>
           <zorder>line_3</zorder>
+          <zorder>label_28</zorder>
+          <zorder>gear_roi_x</zorder>
+          <zorder>label_29</zorder>
+          <zorder>label_8</zorder>
+          <zorder>fil_roi_x</zorder>
+          <zorder>label_9</zorder>
+          <zorder>fil_roi_y</zorder>
+          <zorder>label_7</zorder>
+          <zorder>w_y2</zorder>
+          <zorder>label_10</zorder>
+          <zorder>label_11</zorder>
+          <zorder>label_12</zorder>
+          <zorder>gear_roi_y</zorder>
+          <zorder>w_vline_left_border</zorder>
+          <zorder>label_26</zorder>
+          <zorder>w_vline_right_border</zorder>
+          <zorder>gear_roi_size</zorder>
+          <zorder>fil_roi_size</zorder>
+          <zorder>label_5</zorder>
+          <zorder>vline_left</zorder>
+          <zorder>label_6</zorder>
+          <zorder>vline_right</zorder>
          </widget>
         </item>
        </layout>
@@ -734,6 +756,9 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QFormLayout" name="formLayout">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
            <item row="0" column="0" colspan="2">
             <widget class="QCheckBox" name="width_thresh_inv">
              <property name="enabled">
@@ -754,20 +779,10 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="1" column="0">
             <widget class="QLabel" name="label_14">
              <property name="text">
-              <string>W Ave Range</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="w_ave_range">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="minimum">
-              <number>1</number>
+              <string>Detection settings can go here...</string>
              </property>
             </widget>
            </item>
@@ -874,6 +889,9 @@
            </item>
            <item row="0" column="0" colspan="3">
             <widget class="QPushButton" name="load_video">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Load Video</string>
              </property>

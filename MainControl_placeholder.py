@@ -2,8 +2,6 @@
 """
 Created on Mon Feb 13 11:47:36 2017
 
-@author: Greeff
-
 
 How to convert main.ui to main_ui.py file (a or b):
 a)  from command line:
@@ -35,11 +33,12 @@ from UI.MainControl_placeholder_ui import Ui_MainWindow
 #==============================================================================
 #===============================================================================
 class MainControlPlaceHolder(QMainWindow):
-    '''
+    """
     Placeholder for main control.
-    Collects data and saves it.
+    Collects data and saves it with Pandas.
+    
     Replace with Printer Interface Controler
-    '''
+    """
     def __init__(self,**kwargs):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -69,7 +68,7 @@ class MainControlPlaceHolder(QMainWindow):
         self.update_count = 0
         self.vision_close_requested = False
         self.recording = False #busy or not
-        self.video_mode = kwargs.get('video_mode',True)
+        self.video_mode = kwargs.get('video_mode',False)
         
         #vision process
         self.pipe_2_vision_in,self.pipe_2_vision_out = multiprocessing.Pipe()
@@ -89,24 +88,22 @@ class MainControlPlaceHolder(QMainWindow):
         
         
         #main loop
-        self.main_timer_rate = 5 #ms
+        self.main_timer_rate = 15 #ms
         self.main_timer = QtCore.QTimer(self)
         self.main_timer.timeout.connect(self.main_loop)
         
         #START
         self.vision_process.start()
         self.main_timer.start(self.main_timer_rate)
-        
-  
 
-#-------------------------------------------------------------------------------
     def main_loop(self):
-        '''
-        '''
+        """
+        """
         #check pipe
-        if self.pipe_from_vision_out.poll():
+        short_count = 10
+        while self.pipe_from_vision_out.poll() and short_count > 0:
             vision_data = self.pipe_from_vision_out.recv()
-
+            short_count -= 1
             if isinstance(vision_data,dict):
                 if vision_data.get('name') == 'frame_result':
                     #update/save new frame result
@@ -150,10 +147,10 @@ class MainControlPlaceHolder(QMainWindow):
 
             self.plot_data_widget.fast_update_y(update_data_y)
 
-#-------------------------------------------------------------------------------                
+                
     def plot_init(self):
-        '''
-        '''
+        """
+        """
   
         self.plot_gear = np.zeros([self.plot_hist_len,2])
         self.plot_fil = np.zeros([self.plot_hist_len,2])
@@ -187,10 +184,10 @@ class MainControlPlaceHolder(QMainWindow):
         plt.show()
         
         self.ui.gridLayout_plot.addWidget(self.plot_data_widget,0,0)
-#-------------------------------------------------------------------------------
+
     def recording_start_clicked(self):
-        '''
-        '''        
+        """
+        """        
         append_texteditor(self.ui.text_main,'Start recording')
         if self.ui.recording_meas_only.isChecked():
             self.pipe_2_vision_in.send({'measure':True})
@@ -204,27 +201,27 @@ class MainControlPlaceHolder(QMainWindow):
         self.ui.recording_stop.setEnabled(True)    
         self.ui.recording_start.setEnabled(False)
         self.recording = True
-#-------------------------------------------------------------------------------
+
     def recording_stop_clicked(self):
-        '''
-        '''
+        """
+        """
         self.recording = False
         self.pipe_2_vision_in.send({'measure':False,'save_video':True})
-        self.save_results()
+        if not(self.ui.recording_video_only.isChecked()):
+            self.save_results()
         self.ui.recording_stop.setEnabled(False)    
         self.ui.recording_start.setEnabled(True)
         append_texteditor(self.ui.text_main,'Stop recording')
         
-#-------------------------------------------------------------------------------
+
     def save_results(self):
-        '''
-        '''
+        """
+        """
         append_texteditor(self.ui.text_main,'Saving')
         
         df_vision = pd.DataFrame(self.vision_row) 
         #df_other = pd.DataFrame(self.other_row) ...
         
-
 #        df_temper = pd_convert_timestamp(df_temper)
         df_vision = pd_convert_timestamp(df_vision)
         
@@ -246,17 +243,17 @@ class MainControlPlaceHolder(QMainWindow):
             result.to_csv(csv_file) #write data
         
         append_texteditor(self.ui.text_main,'Saved results: {}'.format(filename))
-#-------------------------------------------------------------------------------    
+    
     def process_video_clicked(self):
-        '''
-        '''
+        """
+        """
         append_texteditor(self.ui.text_main,'Start processing video')
         self.pipe_2_vision_in.send({'process_video':True})
         
-#-------------------------------------------------------------------------------        
+        
     def closeEvent(self, event):
-        '''
-        '''
+        """
+        """
         if not(self.vision_close_requested):
             append_texteditor(self.ui.text_main,'Close event')
             self.pipe_2_vision_in.send('exit')
@@ -270,35 +267,46 @@ class MainControlPlaceHolder(QMainWindow):
             event.accept()
         
 #==============================================================================
-#==============================================================================
 def pd_convert_timestamp(df,drop_duplicates = 'time_stamp'):
-    '''
+    """
     df- DataFrame, put time_stamp col as datetime index
-    '''
+    """
     if drop_duplicates is not None:
-        df.drop_duplicates('time_stamp',inplace = True) 
+        
+            df.drop_duplicates('time_stamp',inplace = True) 
+        
         #prevent error on concat, temperature values seems to have double rows
     
     df['time_stamp'] = pd.DatetimeIndex(pd.to_datetime(df['time_stamp'],
                                         format = '%H:%M:%S.%f',
                                         exact = False))
     df.set_index('time_stamp',drop = True,inplace = True)
+
     return df
 #==============================================================================
-def write_header_metadata(filehandle,header,comment_char = '#',):
-    '''
-    header is a dictionary 
-    for each item write a row to the filehandle
+def write_header_metadata(filehandle,header,comment_char = '#'):
+    """
+    Header is a dictionary, for each item in the dict write a row to the filehandle
     with the following format: '#key: value'
     
-    '''
+    Args:
+        filehandle: filehandle
+        header(dict): meta data, such as configs, to put the start of the file
+        comment_char(str)
+    
+    """
     lines = json.dumps(header, indent = 4, sort_keys=True)
     for line in lines.split('\n'):
         filehandle.write('#{}\n'.format(line))
 #==============================================================================    
-#===============================================================================
 if __name__ == '__main__':
-            
+    if QtCore.QT_VERSION >= 0x50501:
+        import traceback
+        def excepthook(type_, value, traceback_):
+            traceback.print_exception(type_, value, traceback_)
+            QtCore.qFatal('')
+        sys.excepthook = excepthook     
+        
     app = QApplication(sys.argv)
 
     app_window = MainControlPlaceHolder()
