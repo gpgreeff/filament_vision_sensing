@@ -1048,7 +1048,7 @@ class VisionProcess(Process):
         start application
         """
         self.app = QtWidgets.QApplication([])
-        self.vision = ExtruderCam(self.pipe_2_vision_out,self.pipe_from_vision_in,**self.app_settings)    
+        self.vision = ExtruderCam(self.app,self.pipe_2_vision_out,self.pipe_from_vision_in,**self.app_settings)    
         self.vision.show()
         self.app.exec_()
 #==============================================================================
